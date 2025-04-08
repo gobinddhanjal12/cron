@@ -1,12 +1,10 @@
-const API_URL = process.env.NEXT_PUBLIC_API_ENDPOINT;
-
 export async function GET() {
-  try {
-    const response = await fetch(API_URL);
-    console.log('API Response:', response.data);
-    return new Response('API Request sent successfully.', { status: 200 });
-  } catch (error) {
-    console.error('Error:', error.message);
-    return new Response('Failed to send API Request.', { status: 500 });
-  }
+  console.log("Running cron task!");
+
+  const response = await fetch(process.env.NEXT_PUBLIC_API_ENDPOINT);
+  const data = await response.json();
+
+  console.log("Fetched data:", data);
+
+  return new Response("Cron job executed successfully!", { status: 200 });
 }
